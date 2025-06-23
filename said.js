@@ -35,3 +35,31 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+let currentSlide = 0;
+const slider = document.getElementById("testimonialContainer");
+const total = slider.children.length;
+
+function showSlide(index) {
+  const offset = index * -100;
+  slider.style.transform = `translateX(${offset}%)`;
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % total;
+  showSlide(currentSlide);
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + total) % total;
+  showSlide(currentSlide);
+}
+
+// Animation on scroll
+window.addEventListener("scroll", () => {
+  const section = document.getElementById("testimonials");
+  const rect = section.getBoundingClientRect();
+  if (rect.top < window.innerHeight - 100) {
+    section.classList.add("visible");
+  }
+});
